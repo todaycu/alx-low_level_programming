@@ -1,9 +1,11 @@
-#include "stdio.h"
+#include "putchar.h"
+
 /**
- * main - Prints _putchar
+ * main- a program that prints _putchar and returns 0
  *
- * Return: Always 0 (Success)
+ *Return: always 0
  */
+
 int main(void)
 {
 	_putchar('_');
