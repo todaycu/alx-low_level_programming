@@ -1,15 +1,19 @@
-#include "_putchar.h"
-
+#include "stdio.h"
 /**
- * main - a simple program that outputs "_putchar"
- * Return: 0 on success
+ * main - Prints _putchar
+ *
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-	char str[] = "_putchar\n";
-	int i = 0;
-
-	while (str[i] != '\0')
-		_putchar(str[i++]);
+	_putchar('_');
+	_putchar('p');
+	_putchar('u');
+	_putchar('t');
+	_putchar('c');
+	_putchar('h');
+	_putchar('a');
+	_putchar('r');
+	_putchar('\n');
 	return (0);
 }
