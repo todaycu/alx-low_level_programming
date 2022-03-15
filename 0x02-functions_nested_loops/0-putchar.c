@@ -1,19 +1,15 @@
 #include "_putchar.h"
+
 /**
- * main - Entry point
- *
- * Return: Always 0 (Success)
+ * main - a simple program that outputs "_putchar"
+ * Return: 0 on success
  */
 int main(void)
 {
-	char *sh = "_putchar";
+	char str[] = "_putchar\n";
+	int i = 0;
 
-	while (*sh)
-	{
-		_putchar(*sh);
-		sh++;
-	}
-	_putchar('\n');
-
+	while (str[i] != '\0')
+		_putchar(str[i++]);
 	return (0);
 }
