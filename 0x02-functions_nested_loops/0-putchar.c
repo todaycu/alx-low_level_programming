@@ -1,21 +1,19 @@
 #include "main.h"
-
 /**
- * main- a program that prints _putchar and returns 0
- *
- *Return: always 0
- */
-
+ * main - entry block
+ * @void: no argument
+ * Return: 0
+ **/
 int main(void)
 {
-	_putchar('_');
-	_putchar('p');
-	_putchar('u');
-	_putchar('t');
-	_putchar('c');
-	_putchar('h');
-	_putchar('a');
-	_putchar('r');
+	char tolera[] = "_putchar";
+
+	int c;
+
+	for (c = 0; c < 8; c++)
+	{
+		_putchar(tolera[c]);
+	}
 	_putchar('\n');
 	return (0);
 }
