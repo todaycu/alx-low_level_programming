@@ -1,20 +1,34 @@
 #include "main.h"
+<<<<<<< HEAD
 
 /**
-* print_chessboard - function that prints the chessboard
-* @a: character pointer
-*/
-
+ * print_chessboard - prints chessboard.
+ *
+ * @a: rows.
+ * Return: nothing.
+=======
+/**
+ * print_chessboard - a function that prints the chessboard
+ * @a: 2d array of chars
+ *
+ * Return: nothing
+>>>>>>> a77d10a15e5d1a12b1b493c9797b66598eaab382
+ */
 void print_chessboard(char (*a)[8])
 {
-int row, col;
+	int i, j;
 
-for (row = 0; a[row][7]; row++)
-{
-for (col = 0; col < 8; col++)
-{
-_putchar(a[row][col]);
-}
-_putchar('\n');
-}
+	for (i = 0; i < 8; i++)
+	{
+		for (j = 0; j < 8; j++)
+		{
+			_putchar(a[i][j]);
+		}
+<<<<<<< HEAD
+		_putchar('\n');
+=======
+
+	_putchar('\n');
+>>>>>>> a77d10a15e5d1a12b1b493c9797b66598eaab382
+	}
 }
