@@ -1,24 +1,18 @@
-**
- * @file 0-memset.c
- * @author tolera
- * @date 2022-03-28
- * 
- * @copyright Copyright (c) 2022
- * 
- */
 #include "main.h"
+
 /**
- * @brief - A function that fills memory with a constant byte.
- * @s: memory area
- * @b: constant byte
- * @n: bytes filled
- * Return: the pointer to dest
+ * *_memset - fills memory with a constant byte.
+ * @s: pointer to put the constant
+ * @b: constant
+ * @n: max bytes to use
+ * Return: s
  */
+
 char *_memset(char *s, char b, unsigned int n)
 {
 	unsigned int i;
 
-	for (i = 0; i < n; i++)
+	for (i = 0; n > 0; i++, n--)
 	{
 		s[i] = b;
 	}
