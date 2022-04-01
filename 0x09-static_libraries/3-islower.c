@@ -1,11 +1,19 @@
 #include "main.h"
 
 /**
- * _islower - checkes wheater its lowercase or not
- * @c: accepts chars and int to eval
- * Return: 1 or 0
+ * _islower - tests whether a character is a
+ * lowercase letter from the English alphabet.
+ * @c: character to test.
+ * Return: 1 if it is a lowercase letter, 0 if it is not a lowercase letter.
  */
 int _islower(int c)
 {
-return ((c >= 'a' && c <= 'z') ? 1 : 0);
+	if (c >= 'a' && c <= 'z')
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }
