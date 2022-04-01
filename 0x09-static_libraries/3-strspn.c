@@ -1,31 +1,36 @@
 #include "main.h"
+
 /**
-*_strspn - search the number of bytes in the initial
-* segment of s which consist only of bytes from accept
-*@s:segment targeted
-*@accept:reference bytes container
-*
-*Return:returns the number of bytes in the initial
-* segment of s which consist only of bytes from accept
-*/
+ * _strspn - search a string for a set of bytes
+ * @s: char string array
+ * @accept: char array to check bytes with
+ * Return: Number of bytes in the intial segment of `s`
+ */
+
 unsigned int _strspn(char *s, char *accept)
 {
-	unsigned int bytes = 0;
 	int i;
+	int j;
+	int c;
 
-	while (*s)
+	i = 0;
+	c = 0;
+
+	while (s[i] != '\0')
 	{
-		for (i = 0; accept[i]; i++)
+		j = 0;
+		while (accept[j] != '\0')
 		{
-			if (accept[i] == *s)
+			if (s[i] == accept[j])
 			{
-				bytes++;
+				c++;
 				break;
 			}
-			else if ((accept[i + 1]) == '\0')
-				return (bytes);
+			j++;
 		}
-		s++;
+		if (accept[j] == '\0')
+			break;
+		i++;
 	}
-	return (bytes);
+	return (c);
 }
