@@ -1,11 +1,21 @@
+
 #include "main.h"
 
 /**
- *_abs - givies absolute value
- *@num : number tobe eval
- *Return: + ve integer
+ * _abs - calculate the absolute value of the number from zero.
+ * @r: An integer input
+ * Description: This function returns absolute value of a number
+ * Return: Absolut value of number r
  */
-int _abs(int num)
+
+int _abs(int r)
 {
-return ((num >= 0) ? num : num * -1);
+	if (r >= 0)
+	{
+		return (r);
+	}
+	else
+	{
+		return (r * -1);
+	}
 }
