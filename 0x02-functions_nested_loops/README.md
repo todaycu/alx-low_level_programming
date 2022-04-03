@@ -71,7 +71,7 @@
 * Write a function that adds two integers and returns the result.
 
 * Prototype: int add(int, int);
-# Task 11. Holberton School, 98 Battery Street, the OG
+# Task 11. 98 Battery Street, the OG
 * Write a function that prints all natural numbers from n to 98, followed by a new line.
 
 * Prototype: void print_to_98(int n);
