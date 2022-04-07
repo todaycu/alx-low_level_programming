@@ -3,159 +3,132 @@
 #include <stdio.h>
 
 /**
- * str_ops - Performs some string operations
- * @op: The operation to perform (0-> set length, 1-> fill bytes,
- * 2-> left shift by one byte, 3-> print string and newline)
- * @str: The source string
- * @len: The pointer to the length of the string
- * @n: The number of bytes to fill
- * @c: The character to fill the positions with
- */
-void str_ops(char op, char *str, int *len, int n, char c)
-{
-  int i;
-  if (op == 0)
-  {
-    *len = 0;
-    while (str != NULL && *(str + *len) != '\0')
-      *len += 1;
-  }
-  else if (op == 1)
-  {
-    for (i = 0; str != NULL && i < n; i++)
-      *(str + i) = c;
-  }
-  else if (op == 2)
-  {
-    for (i = 1; i <= n; i++)
-    {
-      str[i - 1] = str[i] != '\0' && str[i - 1] != '\0' ? str[i] : '\0';
-    }
-  }
-  else if (op == 3)
-  {
-    for (i = 0; str != NULL && *(str + i) != '\0'; i++)
-      _putchar(*(str + i));
-    _putchar('\n');
-  }
-}
-/**
- * program_fail - Computes the program failure instructions
- */
-void program_fail(void)
-{
-  str_ops(3, "Error", NULL, 0, '\0');
-  exit(98);
-}
-/**
- * multiply - Computes the product of a number and a multiple of 10
- * @num: The first number
- * @multiple: The second number (a multiple of 10)
+ * _memset - fills memory with a constant byte
  *
- * Return: A pointer containing the result, otherwise program fails
- */
-char *multiply(char *num, char *multiple)
-{
-  int size, mult_len, num_len, i, j;
-  char *result, rem;
-  char carry = 0;
-  str_ops(0, multiple, &mult_len, 0, '\0');
-  str_ops(0, num, &num_len, 0, '\0');
-  size = mult_len + num_len;
-  result = malloc(sizeof(char) * (size + 1));
-  if (result != NULL)
-  {
-    str_ops(1, result, NULL, size, '0');
-    *(result + size) = '\0';
-    mult_len--;
-    j = size - mult_len - 1;
-    for (i = 1; i <= mult_len; i++)
-      *(result + size - i) = '0';
-    for (i = num_len - 1; i >= 0; i--)
-    {
-      if (!(*(num + i) >= '0' && *(num + i) <= '9'))
-        program_fail();
-      if (!(*multiple >= '0' && *multiple <= '9'))
-        program_fail();
-      rem = ((*(num + i) - '0') * (*multiple - '0') + carry) % 10;
-      carry = ((*(num + i) - '0') * (*multiple - '0') + carry) / 10;
-      *(result + j) = rem + '0';
-      j--;
-    }
-    if (carry > 0)
-      *(result + j) = carry + '0';
-    if (*result == '0')
-      str_ops(2, result, NULL, size, '\0');
-    return (result);
-  }
-  program_fail();
-  return (NULL);
-}
-/**
- * add - Adds two numbers and stores the result in the second number
- * @num: The first number
- * @r: The second number
- * @size_r: The size of the result buffer
- */
-void add(char *num, char *r, int size_r)
-{
-  int idx_num;
-  int idx_r;
-  char dig1;
-  char dig2;
-  char carry;
-  char rem;
-  str_ops(0, num, &idx_num, 0, '\0');
-  carry = 0;
-  idx_num--;
-  for (idx_r = size_r - 1; idx_r >= 0; idx_r--)
-  {
-    dig1 = idx_num >= 0 ? *(num + idx_num) - '0' : 0;
-    dig2 = idx_r >= 0 ? *(r + idx_r) - '0' : 0;
-    rem = (dig1 + dig2 + carry) % 10;
-    carry = (dig1 + dig2 + carry) / 10;
-    *(r + idx_r) = rem + '0';
-    idx_num--;
-  }
-}
-/**
- * main - A program that computes the product of two numbers
- * \ that are passed to it
- * @argc: The number of command-line arguments
- * @argv: The command-line arguments
+ * @s: input pointer that represents memory block
+ *     to fill
+ * @b: characters to fill/set
+ * @n: number of bytes to be filled
  *
- * Return: 0 if successful, otherwise 98
- */
+ * Return: pointer to the filled memory area
+*/
+
+char *_memset(char *s, char b, unsigned int n)
+{
+	unsigned int i = 0;
+
+	while (i < n)
+	{
+		s[i] = b;
+		i++;
+	}
+	return (s);
+}
+
+/**
+ * _calloc - function that allocates memory
+ *           for an array using memset
+ *
+ * @nmemb: size of array
+ * @size: size of each element
+ *
+ * Return: pointer to new allocated memory
+*/
+
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	char *ptr;
+
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (ptr == NULL)
+		return (NULL);
+	_memset(ptr, 0, nmemb * size);
+
+	return (ptr);
+}
+
+
+/**
+ * multiply - initialize array with 0 byte
+ *
+ * @s1: string 1
+ * @s2: string 2
+ *
+ * Return: nothing
+*/
+
+void multiply(char *s1, char *s2)
+{
+	int i, l1, l2, total_l, f_digit, s_digit, res = 0, tmp;
+	char *ptr;
+	void *temp;
+
+	l1 = _length(s1);
+	l2 = _length(s2);
+	tmp = l2;
+	total_l = l1 + l2;
+	ptr = _calloc(sizeof(int), total_l);
+
+	/* store our pointer address to free later */
+	temp = ptr;
+
+	for (l1--; l1 >= 0; l1--)
+	{
+		f_digit = s1[l1] - '0';
+		res = 0;
+		l2 = tmp;
+		for (l2--; l2 >= 0; l2--)
+		{
+			s_digit = s2[l2] - '0';
+			res += ptr[l2 + l1 + 1] + (f_digit * s_digit);
+			ptr[l1 + l2 + 1] = res % 10;
+			res /= 10;
+		}
+		if (res)
+			ptr[l1 + l2 + 1] = res % 10;
+	}
+
+	while (*ptr == 0)
+	{
+		ptr++;
+		total_l--;
+	}
+
+	for (i = 0; i < total_l; i++)
+		printf("%i", ptr[i]);
+	printf("\n");
+	free(temp);
+}
+
+
+/**
+ * main - Entry point
+ *
+ * Description: a program that multiplies
+ *            two positive numbers
+ *
+ * @argc: number of arguments
+ * @argv: arguments array
+ *
+ * Return: 0 on success 98 on faliure
+*/
+
 int main(int argc, char *argv[])
 {
-  char *num1, *num2, *result, *product;
-  int size, i, len2;
-  if (argc == 3)
-  {
-    num1 = argv[1];
-    num2 = argv[2];
-    str_ops(0, num1, &size, 0, '\0');
-    str_ops(0, num2, &len2, 0, '\0');
-    size += len2;
-    result = malloc(sizeof(char) * (size + 1));
-    if (result != NULL)
-    {
-      str_ops(1, result, NULL, size, '0');
-      *(result + size) = '\0';
-      for (i = 0; i < len2; i++)
-      {
-        product = multiply(num1, num2 + i);
-        add(product, result, size);
-        free(product);
-      }
-      while (*result == '0' && *(result + 1) != '\0')
-        str_ops(2, result, NULL, size, '\0');
-      str_ops(3, result, NULL, 0, '\0');
-      free(result);
-      return (0);
-    }
-    program_fail();
-  }
-  program_fail();
-  return (98);
+	char *n1 = argv[1];
+	char *n2 = argv[2];
+
+	if (argc != 3 || check_number(n1) || check_number(n2))
+		error_exit();
+
+	if (*n1 == '0' || *n2 == '0')
+	{
+		_putchar('0');
+		_putchar('\n');
+	}
+	else
+		multiply(n1, n2);
+	return (0);
 }
